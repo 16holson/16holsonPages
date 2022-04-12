@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Generic - Phantom by HTML5 UP</title>
+		<title>Guessing Game</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -40,21 +40,29 @@
 						<h2>Menu</h2>
 						<ul>
 							<li><a href="index.html">Home</a></li>
-							<li><a href="generic.html">Ipsum veroeros</a></li>
-							<li><a href="generic.html">Tempus etiam</a></li>
-							<li><a href="generic.html">Consequat dolor</a></li>
-							<li><a href="elements.html">Elements</a></li>
+							<li><a href="guess.html">Guessing Game</a></li>
+							<li><a href="hangman.html">Hangman</a></li>
+							<li><a href="scholarship.html">Scholarship App</a></li>
+							<li><a href="speed.html">Speed Game</a></li>
 						</ul>
 					</nav>
 
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Generic Page</h1>
-							<span class="image main"><img src="images/pic13.jpg" alt="" /></span>
-							<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fergiat. Pellentesque in mi eu massa lacinia malesuada et a elit. Donec urna ex, lacinia in purus ac, pretium pulvinar mauris. Curabitur sapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique.</p>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dapibus rutrum facilisis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam tristique libero eu nibh porttitor fermentum. Nullam venenatis erat id vehicula viverra. Nunc ultrices eros ut ultricies condimentum. Mauris risus lacus, blandit sit amet venenatis non, bibendum vitae dolor. Nunc lorem mauris, fringilla in aliquam at, euismod in lectus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. In non lorem sit amet elit placerat maximus. Pellentesque aliquam maximus risus, vel venenatis mauris vehicula hendrerit.</p>
-							<p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis. Praesent rutrum sem diam, vitae egestas enim auctor sit amet. Pellentesque leo mauris, consectetur id ipsum sit amet, fersapien risus, commodo eget turpis at, elementum convallis elit. Pellentesque enim turpis, hendrerit tristique lorem ipsum dolor.</p>
+							<h1>Guessing Game</h1>
+							<p>This was an individual project where we were told to create a website where you could login, play a guessing game, and stores the data to a database. I have created websites with HTML/CSS/Javascript before but this was my first time using PHP, databases, and hosting services on a website.</p>
+							<p>When logging in or creating an account the username, hashedpassword and sait is stored on a locally hosted MySQL database. To salt and hash the passwords I used this code:
+							<br>$salt = random_bytes(16);
+    							<br>$saltedPass = $password . $salt;
+    							<br>$hashedPass = hash('sha256', $saltedPass);
+							<br>As part of the assignment we were not allowed to use the existing hashing functions such as password_hash(). For the actual game it generates a random number between 1 and 100 and tells the user if they are too low/high. Once a game is complete their number of guesses are saved to the database and the top ten scores are shown.</p>
+							<p>A challenge I faced while creating this website was that I have never worked with PHP or MySql before. We had a few lectures on both topic but I had to research most of it. The biggest hurdle I had to over come was connecting to my database. I recently started to get into raspberry pis and I wanted to use one for the database in this project. The actual installation of the database was fairly easy. The tricky part was port forwarding so that I could access the database outside of my local network. Once I did that I added a connection file to the project and was able to read/write to the database.</p>
+							<p>The tool I used for this project includes PHPStorm, MySql, InfinityFree, Ubuntu, DataGrip, and Bootstrap</p>
+							<span class="image"><img src="images/guessinggameone.png" alt="" /></span>
+							<span class="image"><img src="images/guessinggametwo.png" alt="" /></span>
+							<span class="image"><img src="images/guessinggamethree.png" alt="" /></span>
+							<span class="image"><img src="images/guessinggamefour.png" alt="" /></span>
 						</div>
 					</div>
 
@@ -63,34 +71,16 @@
 						<div class="inner">
 							<section>
 								<h2>Get in touch</h2>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<input type="text" name="name" id="name" placeholder="Name" />
-										</div>
-										<div class="field half">
-											<input type="email" name="email" id="email" placeholder="Email" />
-										</div>
-										<div class="field">
-											<textarea name="message" id="message" placeholder="Message"></textarea>
-										</div>
+								<div class="fields">
+									<div class="field half">
+										<p name="email" id="email">hunterolson11@yahoo.co.uk</p>
 									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send" class="primary" /></li>
-									</ul>
-								</form>
+								</div>
 							</section>
 							<section>
 								<h2>Follow</h2>
 								<ul class="icons">
-									<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
-									<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
-									<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+									<li><a href="https://github.com/16holson" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
 								</ul>
 							</section>
 							<ul class="copyright">
