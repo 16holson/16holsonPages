@@ -56,27 +56,27 @@
 							<p>I designed the login and hangman pages. To display the keyboard I stored each letter in a Dictionary along side a boolean value to check it the letter has been clicked. I also developed the functionality of the game. When a letter is pressed it is compared with a distinct array of the words letters. If the letter is in the word, the Dictionary that contains the letters of the word and a boolean value is updated to show that the letter has been guessed. Finally I wrote a function that pulls the top ten scores from our database with the code below.
 							<br>public Dictionary<string, string> GetHighScores()
 							<br>{
-								<br<string query = "SELECT TOP 10 username, score FROM Users WHERE score <> -1 ORDER BY score ASC";
-								<br>Dictionary<string, string> top10 = new Dictionary<string, string>();
-								<br>using (OdbcConnection connection = new OdbcConnection(ConnectionString))
-								<br>{
-									<br>OdbcCommand command = new OdbcCommand(query, connection);
-									<br>try
-									<br>{
-										<br>connection.Open();
-										<br>OdbcDataReader reader = command.ExecuteReader();
-										<br>while (reader.Read())
-										<br>{
-											<br>top10.Add(reader[0].ToString(), reader[1].ToString());
-										<br>}
-										<br>reader.Close();
-										<br>return top10;
-									<br>}
-									<br>catch(Exception ex)
-									<br>{
-										<br>throw new Exception(ex.Message, ex);
-									<br>}
-								<br>}
+							&nbsp;<br>string query = "SELECT TOP 10 username, score FROM Users WHERE score <> -1 ORDER BY score ASC";
+							&nbsp;<br>Dictionary&lt;string, string&gt; top10 = new Dictionary&lt;string, string&gt;();
+							&nbsp;<br>using (OdbcConnection connection = new OdbcConnection(ConnectionString))
+							&nbsp;<br>{
+							&nbsp;&nbsp;<br>OdbcCommand command = new OdbcCommand(query, connection);
+							&nbsp;&nbsp;<br>try
+							&nbsp;&nbsp;<br>{
+							&nbsp;&nbsp;&nbsp;<br>connection.Open();
+							&nbsp;&nbsp;&nbsp;<br>OdbcDataReader reader = command.ExecuteReader();
+							&nbsp;&nbsp;&nbsp;<br>while (reader.Read())
+							&nbsp;&nbsp;&nbsp;<br>{
+							&nbsp;&nbsp;&nbsp;&nbsp;<br>top10.Add(reader[0].ToString(), reader[1].ToString());
+							&nbsp;&nbsp;&nbsp;<br>}
+							&nbsp;&nbsp;&nbsp;<br>reader.Close();
+							&nbsp;&nbsp;&nbsp;<br>return top10;
+							&nbsp;&nbsp;<br>}
+							&nbsp;&nbsp;<br>catch(Exception ex)
+							&nbsp;&nbsp;<br>{
+							&nbsp;&nbsp;&nbsp;<br>throw new Exception(ex.Message, ex);
+							&nbsp;&nbsp;<br>}
+							&nbsp;<br>}
 							<br>}</p>
 							<p>The challenge I faced with this project was the functionality of the Hangman page. At first I was just try what came to mind and that wasn't working. I stepped back and laid out what I needed the program to do. After that with fresh eyes I was able to figure it out.</p>
 							<span class="image main"><img src="images/hangmanone.png" alt="" /></span>
