@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Time Tracker</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="inner">
+
+							<!-- Logo -->
+								<a href="index.html" class="logo">
+									<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Phantom</span>
+								</a>
+
+							<!-- Nav -->
+								<nav>
+									<ul>
+										<li><a href="#menu">Menu</a></li>
+									</ul>
+								</nav>
+
+						</div>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<h2>Menu</h2>
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="guess.html">Guessing Game</a></li>
+							<li><a href="hangman.html">Hangman</a></li>
+							<li><a href="scholarship.html">Scholarship App</a></li>
+							<li><a href="speed.html">Speed Game</a></li>
+              <li><a href="timetracker.html">Time Tracker</a></li>
+						</ul>
+					</nav>
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+							<h1>Hangman</h1>
+							<a href="https://github.com/16holson/.NETProjects">Github Repository</a>
+							<p>This was a group project with team members Tage Higley, Ashley Stuart , Hunter Olson, and Denver Jensen. The project started by a previous group. They were able to set up the project, implement some basic visuals, and got the clocking in/out to function.</p>
+							<p>The user is able to create an account that starts out as a Student user. Each user is able to request to be upgraded to an instructor. All of the requests are handled by the Admin users. Once logged in the user can view their Courses, Projects, and Groups. They are able to view and join any Course, Project, and Group. In a specific group the user can clock in/out or enter their time in manually. After a clock time is added the graphs and tables are updated. They can also edit any of their previous clock times. The Instructor users can create Courses, Projects, and Groups. They also can accept students into their courses. The Admin users can edit all of the information on any user and handles requests for user upgrades and password resets.</p>
+							<p>I did the majority of the front end design. I also added tables to the Instructor, Groups, Courses, Course and Project pages. Finally I implement all of the functionality for the Group page including clock in/out, graphs, previous clock times, and manual clock times. To get the data for the graphs I created the function below. It basically creates two list, one for the pie chart. If the passed user doesn't have an entry in the list it creates one with the timecard info otherwise it adds the timecard info the the users list.</p>
+<pre>
+  //Gets the total time for each user and sets the pie chart
+  getTotalTimes(timeCards: ITimeCard[], user: IUser): void
+  {
+    let totalTime = 0;
+    let name = user.firstName + " " + user.lastName;
+    timeCards.forEach(timeCard =>
+    {
+      let newIn = new Date(parseInt(timeCard.timeIn as string));
+      let newOut = new Date(parseInt(timeCard.timeOut as string));
+      let hours = (newOut.getTime() - newIn.getTime())/ 3600000;
+      let date = (newIn.getMonth() + 1) + "/" + newIn.getDate() + "/" + newIn.getFullYear();
+
+      //Date not in list
+      if(this.lineData.findIndex(value => value.name == date) == -1)
+      {
+        this.lineData = [...this.lineData, {name: date, series:[{name: name, value: hours}]}];
+      }
+      //Date in list
+      else
+      {
+        //User doesn't have a series yet
+        // @ts-ignore
+        if(this.lineData.find(value => value.name == date).series.findIndex(x => x.name == name) == -1)
+        {
+          // @ts-ignore
+          this.lineData.find(value => value.name == date).series.push({name: name, value: hours});
+        }
+        //User already has a series
+        else
+        {
+          // @ts-ignore
+          this.lineData.find(value => value.name == date).series.find(x => x.name == name).value += hours;
+        }
+      }
+      totalTime += hours;
+    });
+
+    this.lineData.sort(function(a,b){
+      // @ts-ignore
+      return new Date(a.name).getTime() - new Date(b.name).getTime()
+    });
+    this.lineData = [...this.lineData];
+
+    this.pieData = [...this.pieData, {name: name, value: totalTime}];
+    if(this.lineData.length === 0 || this.pieData.length === 0)
+    {
+      this.empty = true;
+      this.chartHeight = "0rem"
+    }
+    else
+    {
+      this.empty = false;
+      this.chartHeight = "30rem"
+    }
+  }
+</pre>
+							<p>The challenge I faced with this project was the functionality of the Group page. Working with time I found out is very annoying. I wasn't able to get it to where I wanted it, but it works. I wanted to split their times if their clock time when past the day mark, but I didn't have time. I was able to parse the time given from the form into hours, minutes, and seconds so it could be displayed in the table. I also had to switch the times into UTC so that I could store it in the database.</p>
+							<p>The tool we used for this project includes Angular 12, NodeJS, Express, Docker, SQLite 3 Database, and Webstorm.</p>
+							<span class="image main"><img src="images/TTLogin.png" alt="" /></span>
+							<span class="image main"><img src="images/TTReset.png" alt="" /></span>
+							<span class="image main"><img src="images/TTDashboard.png" alt="" /></span>
+              <span class="image main"><img src="images/TTCourses.png" alt="" /></span>
+              <span class="image main"><img src="images/TTCourse.png" alt="" /></span>
+              <span class="image main"><img src="images/TTProject.png" alt="" /></span>
+              <span class="image main"><img src="images/TTGroups.png" alt="" /></span>
+              <span class="image main"><img src="images/TTGroup1.png" alt="" /></span>
+              <span class="image main"><img src="images/TTGroup2.png" alt="" /></span>
+              <span class="image main"><img src="images/TTProfile.png" alt="" /></span>
+              <span class="image main"><img src="images/TTInstructor.png" alt="" /></span>
+              <span class="image main"><img src="images/TTAdmin.png" alt="" /></span>
+						</div>
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<div class="inner">
+							<section>
+								<h2>Get in touch</h2>
+								<div class="fields">
+									<div class="field half">
+										<p name="email" id="email">hunterolson11@yahoo.co.uk</p>
+									</div>
+								</div>
+							</section>
+							<section>
+								<h2>Follow</h2>
+								<ul class="icons">
+									<li><a href="https://github.com/16holson" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+		
+							<ul class="copyright">
+								<li>&copy; Untitled. All rights reserved</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							</ul>
+						</div>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
